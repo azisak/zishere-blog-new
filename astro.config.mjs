@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
+import vercelStatic from '@astrojs/vercel/static';
 
 /* 
   We are doing some URL mumbo jumbo here to tell Astro what the URL of your website will be.
@@ -30,6 +31,12 @@ if (isBuild) {
 export default defineConfig({
   server: { port: SERVER_PORT },
   site: BASE_URL,
+  output: 'static',
+  adapter: vercelStatic({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
   integrations: [
     sitemap(),
     tailwind({
